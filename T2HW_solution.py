@@ -18,7 +18,6 @@ pygame.display.set_caption("TDC Window")
 
 def generateRandomLetter():
     letterIndex = random.randint(0,25)
-
     return alphabetArray[letterIndex]
 
 def generateSlantValue():
@@ -57,9 +56,16 @@ while running == True:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 2:
-                print(generateRandomLetter())
-                print("slant", + generateSlantValue())
-                print("height", + generateHeightValue())
+                print("Letter: " + generateRandomLetter())
+                print("Height: ", + generateHeightValue())
+                print("Slant: ", + generateSlantValue())
+
+                for row in range(int(screenHeight/10)):
+                    tempPixelArray = []
+                    for col in range(int(screenWidth/10)):
+                        tempPixelArray.append(int((screen.get_at((col*10,row*10))[0]-255)/(-255)))
+                    print(tempPixelArray)
+
 
     if pygame.mouse.get_pressed()[0] == True:
         mousePostionArray.append(pygame.mouse.get_pos())
