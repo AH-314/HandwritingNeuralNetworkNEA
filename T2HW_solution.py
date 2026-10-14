@@ -44,6 +44,14 @@ alphabetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"
 
 running = True
 
+letter = generateRandomLetter()
+height = generateHeightValue()
+slant = generateSlantValue()
+
+print("Letter: " + letter)
+print("Height: ", + height)
+print("Slant: ", + slant)
+
 
 while running == True:
     # Actions towards screen go in this loop
@@ -56,15 +64,32 @@ while running == True:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 2:
-                print("Letter: " + generateRandomLetter())
-                print("Height: ", + generateHeightValue())
-                print("Slant: ", + generateSlantValue())
+
+                with open("letter.txt", "a") as f:
+                    f.write(str(letter) + "\n" )
+
+                with open("height.txt", "a") as f:
+                    f.write(str(height) + "\n" )
+
+                with open("slant.txt", "a") as f:
+                    f.write(str(slant) + "\n" )
+
+                tempPixelData = ""
 
                 for row in range(int(screenHeight/10)):
-                    tempPixelArray = []
                     for col in range(int(screenWidth/10)):
-                        tempPixelArray.append(int((screen.get_at((col*10,row*10))[0]-255)/(-255)))
-                    print(tempPixelArray)
+                        tempPixelData += str((int((screen.get_at((col*10,row*10))[0]-255)/(-255))))
+
+                with open("pixelData.txt", "a") as f:
+                    f.write(str(tempPixelData) + "\n")
+
+                letter = generateRandomLetter()
+                height = generateHeightValue()
+                slant = generateSlantValue()
+                 
+                print("Letter: " + letter)
+                print("Height: ", + height)
+                print("Slant: ", + slant)
 
 
     if pygame.mouse.get_pressed()[0] == True:
